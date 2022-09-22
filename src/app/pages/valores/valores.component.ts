@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./valores.component.scss']
 })
 export class ValoresComponent implements OnInit {
+  selector: string[] = [
+    'Después de un tiempo',
+    'Quizás en cuanto conozca más',
+    'Tan pronto esté disponible',
+  ];
 
   constructor() { }
 

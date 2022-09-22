@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Input() img: string = 'https://picsum.photos/1440/1440';
+  @Input() img: string = '/assets/images/playa.jpeg';
 
   constructor() {}
 

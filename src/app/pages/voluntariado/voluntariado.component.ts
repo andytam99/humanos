@@ -9,6 +9,14 @@ import { Servicios } from 'src/app/mocks/servicios';
 })
 export class VoluntariadoComponent implements OnInit {
   slides: CarSlide[] = Servicios
+  selector: string[] = [
+    'Música',
+    'Artes Marciales',
+    'Ejercicios',
+    'Baile',
+    'Artesanía',
+    'Alimentación',
+  ];
 
   constructor() { }
 
