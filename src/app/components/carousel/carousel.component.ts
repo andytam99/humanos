@@ -22,7 +22,7 @@ SwiperCore.use([Pagination, Navigation]);
   encapsulation: ViewEncapsulation.None,
 })
 export class CarouselComponent implements OnInit {
-  @Input() slides: CarSlide[] = Experiencias;
+  @Input() slides: CarSlide[] = [];
 
   navigation: NavigationOptions = {
     enabled: true,
