@@ -12,7 +12,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/data/in-memory-data.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,11 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SwiperModule } from 'swiper/angular';
 
-import { HeroesComponent } from './components/heroes/heroes.component';
-import { HeroDetailComponent } from './components/hero-detail/hero-detail.component';
 import { MessagesComponent } from './messages/messages.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HeroSearchComponent } from './components/hero-search/hero-search.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SlideComponent } from './components/slide/slide.component';
@@ -38,11 +33,7 @@ import { MembresiaComponent } from './pages/membresia/membresia.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeroesComponent,
-    HeroDetailComponent,
     MessagesComponent,
-    DashboardComponent,
-    HeroSearchComponent,
     NavbarComponent,
     HeaderComponent,
     SlideComponent,
@@ -56,9 +47,6 @@ import { MembresiaComponent } from './pages/membresia/membresia.component';
   imports: [
     SwiperModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
-      dataEncapsulation: false,
-    }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

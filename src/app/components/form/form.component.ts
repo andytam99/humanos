@@ -1,63 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 
 import {
   FormControl,
+  FormGroup,
   FormGroupDirective,
-  NgForm,
   Validators,
 } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(
-      control &&
-      control.invalid &&
-      (control.dirty || control.touched || isSubmitted)
-    );
-  }
-}
+import { FormService } from 'src/app/services/form/form.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent implements OnInit {
-  selected = new FormControl('valid', [
-    Validators.required,
-    Validators.pattern('valid'),
-  ]);
+export class FormComponent implements AfterViewInit {
+  @Input() selector: string[] = [];
+  private selectorPattern: RegExp | string = '';
 
-  selectFormControl = new FormControl('valid', [
-    Validators.required,
-    Validators.pattern('valid'),
-  ]);
+  formGroup = new FormGroup({
+    nombre: new FormControl(null, {
+      validators: [Validators.required, Validators.maxLength(25)],
+    }),
+    apellido: new FormControl(null, {
+      validators: [Validators.required, Validators.maxLength(25)],
+    }),
+    numero: new FormControl(null, {
+      validators: [Validators.pattern('([^a-z-.][0-9])*')],
+    }),
+    correo: new FormControl(null, {
+      validators: [Validators.required, Validators.email],
+    }),
+    selected: new FormControl(null, [Validators.required]),
+    terminos: new FormControl(false, [
+      Validators.required,
+      Validators.pattern(/true/gi),
+    ]),
+  });
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  onSubmit(form: FormGroupDirective) {
+    console.log(this.formGroup, this.selectorPattern);
+    this.formService.sendform(this.formGroup.value, 'miembro');
+    form.reset();
+  }
 
-  nombre = new FormControl('', [
-    Validators.required,
-    Validators.maxLength(25),
-  ]);
+  constructor(private formService: FormService) {}
 
-  apellido = new FormControl('', [
-    Validators.required,
-    Validators.maxLength(25),
-  ]);
-
-  checked = false;
-
-  matcher = new MyErrorStateMatcher();
-
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    this.selectorPattern = new RegExp(this.selector.join('|'), 'gi');
+    this.formGroup.controls.selected.addValidators(
+      Validators.pattern(this.selectorPattern)
+    );
+  }
 }

@@ -7,7 +7,7 @@
 
     <div ngClass="{{img ? 'md:w-2/4' : 'md:w-2/3'}}" class="w-full p-10">
         <h3 *ngIf="title" class="mb-4">{{title}}</h3>
-        <p ngClass="{{img ? '' : 'text-2xl'}}" *ngFor="let text of body" class="mb-4 last:mb-0">
+        <p ngClass="{{img ? '' : 'text-3xl font-medium text-gray-700'}}" *ngFor="let text of body" class="mb-4 last:mb-0">
             {{text}}
         </p>
     </div>

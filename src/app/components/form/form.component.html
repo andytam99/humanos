@@ -1,4 +1,5 @@
-<form class="form bg-white p-10 max-w-screen md:max-w-lg md:rounded-xl drop-shadow-lg">
+<form #form="ngForm" class="form bg-white p-10 w-full max-w-screen md:max-w-lg md:rounded-xl drop-shadow-lg"
+    [formGroup]="formGroup" (ngSubmit)="onSubmit(form)">
 
     <h4 class="mb-8">Inscribirme a Lista de Espera</h4>
 
@@ -6,64 +7,71 @@
 
         <mat-form-field class="w-full md:pr-2" appearance="fill">
             <mat-label>Nombre</mat-label>
-            <input type="text" matInput [formControl]="nombre" placeholder="Escribir Nombre">
-            <mat-error *ngIf="nombre.hasError('required')">
+            <input type="text" matInput formControlName="nombre" placeholder="Escribir Nombre">
+            <mat-error *ngIf="formGroup.hasError('required', 'nombre')">
                 Nombre es <strong>requerido</strong>
             </mat-error>
         </mat-form-field>
 
         <mat-form-field class="w-full md:pl-2" appearance="fill">
             <mat-label>Apellido</mat-label>
-            <input type="text" matInput [formControl]="apellido" placeholder="Escribir Apellido">
-            <mat-error *ngIf="apellido.hasError('required')">
+            <input type="text" matInput formControlName="apellido" placeholder="Escribir Apellido">
+            <mat-error *ngIf="formGroup.hasError('required', 'apellido')">
                 Apellido es <strong>requerido</strong>
             </mat-error>
         </mat-form-field>
 
     </div>
 
-    <mat-form-field class="w-full mb-4" appearance="fill">
+    <mat-form-field class="w-full" appearance="fill">
         <mat-label>Correo</mat-label>
-        <input type="email" matInput [formControl]="emailFormControl" placeholder="Escribir correo">
-        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        <input type="email" matInput formControlName="correo" placeholder="Escribir correo">
+        <mat-error *ngIf="formGroup.hasError('pattern', 'email')">
             Please enter a valid email address
         </mat-error>
-        <mat-error *ngIf="emailFormControl.hasError('required')">
-            Email is <strong>required</strong>
+        <mat-error *ngIf="formGroup.hasError('required', 'correo')">
+            Correo <strong>requerido</strong>
         </mat-error>
     </mat-form-field>
 
+    <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Número</mat-label>
+        <input type="text" matInput formControlName="numero" placeholder="Escribir Número">
+        <mat-error *ngIf="formGroup.hasError('pattern', 'numero')">
+            Please enter a valid phone number
+        </mat-error>
+    </mat-form-field>
 
     <mat-form-field class="w-full mb-4" appearance="fill">
         <mat-label>Elegir</mat-label>
 
-        <mat-select [formControl]="selected" [errorStateMatcher]="matcher">
+        <mat-select formControlName="selected">
             <mat-option value="invalid">Elegir</mat-option>
-            <mat-option value="valid">Tan pronto esté disponible</mat-option>
-            <mat-option value="valid">Quizás en cuanto conozca más</mat-option>
-            <mat-option value="valid">Tras un tiempo de conocer</mat-option>
+            <mat-option *ngFor="let x of selector" [value]="x">{{x}}</mat-option>
         </mat-select>
 
-        <mat-error *ngIf="selected.hasError('required')">You must make a selection</mat-error>
-
-        <mat-error *ngIf="selected.hasError('pattern') && !selected.hasError('required')">
-            Your selection is invalid
+        <mat-error *ngIf="(formGroup.hasError('pattern', 'selected') || !formGroup.hasError('required', 'selected'))">
+            Debe seleccionar una opción
         </mat-error>
 
     </mat-form-field>
 
-    <div class="mb-8 flex items-center justify-center w-full h-auto">
-        <mat-checkbox class="mr-2" [(ngModel)]="checked"></mat-checkbox>
-        <label class="w-full">
-            Acepto los <a routerLink="/terminos"
-                class="transition-all font-medium hover:underline underline-offset-4 w-auto text-gray-600 hover:text-gray-800">Términos
-                y
-                Condiciones</a>
-        </label>
+    <div class="mb-8 flex flex-col items-center justify-center w-full h-auto">
+
+        <div class="flex items-center justify-center w-full h-auto">
+            <mat-checkbox formControlName="terminos" name="terminos" class="mr-2"></mat-checkbox>
+            <label class="w-full">
+                Acepto los <a routerLink="/terminos"
+                    class="transition-all font-medium hover:underline underline-offset-4 w-auto text-gray-600 hover:text-gray-800">Términos
+                    y
+                    Condiciones</a>
+            </label>
+        </div>
+
     </div>
 
 
-    <button class="transition-all rounded-xl w-full h-12 bg-gray-600 hover:bg-gray-700 text-white"
-        type="submit">Inscribir</button>
+    <button class="transition-all rounded-xl w-full h-12 bg-gray-600 hover:bg-gray-700 text-white disabled:bg-gray-400"
+        type="submit" [disabled]="!formGroup.valid">Inscribir</button>
 
 </form>
