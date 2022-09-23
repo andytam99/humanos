@@ -1,24 +1,17 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ViewChild,
-  OnInit,
-  Input,
-} from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
 import { CarSlide } from 'src/app/interfaces/carousel';
-import { Experiencias } from 'src/app/mocks/experiencias';
 
 // import Swiper core and required modules
-import SwiperCore, { Pagination, Navigation } from 'swiper';
+import SwiperCore, { Navigation } from 'swiper';
 import { NavigationOptions } from 'swiper/types';
 
 // install Swiper modules
-SwiperCore.use([Pagination, Navigation]);
+SwiperCore.use([Navigation]);
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss'],
+  styleUrls: ['./carousel.component.scss', '../../../../node_modules/swiper/swiper.scss','../../../../node_modules/swiper/modules/navigation/navigation.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class CarouselComponent implements OnInit {

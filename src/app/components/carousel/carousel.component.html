@@ -1,13 +1,23 @@
 <swiper [navigation]="navigation" class="mySwiper">
-    <ng-template *ngFor="let slide of slides" class="p-10 md:p-20 flex-col md:flex-row" swiperSlide>
-        <div class="md:translate-x-20 w-full md:w-2/4 h-full">
-            <img src="{{slide.img}}" class="w-full object-cover h-full max-h-screen" />
+
+    <ng-template *ngFor="let slide of slides" swiperSlide>
+
+        <div class="relative p-10 flex flex-col md:flex-row w-full min-h-screen h-full">
+
+            <div class="md:translate-x-20 md:left-0 md:absolute w-full md:w-2/4 h-full">
+                <img src="{{slide.img}}" class="w-full object-cover h-full max-h-screen" />
+            </div>
+
+            <div
+                class="md:-translate-x-20 md:right-0 md:top-1/2 md:-translate-y-1/2 p-10 md:absolute w-full text-left md:w-2/4 bg-white shadow-md h-auto">
+                <h3 class="mb-4">{{slide.title}}</h3>
+                <p class="mb-4 last:mb-0">
+                    {{slide.text}}
+                </p>
+            </div>
+
         </div>
-        <div class="md:-translate-x-20 p-10 w-full text-left md:w-2/4 bg-white shadow-md">
-            <h3 class="mb-4">{{slide.title}}</h3>
-            <p class="mb-4 last:mb-0">
-                {{slide.text}}
-            </p>
-        </div>
+
     </ng-template>
+
 </swiper>
