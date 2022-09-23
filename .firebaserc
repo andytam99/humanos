@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "clubhumanista-bc796"
+  },
+  "targets": {
+    "clubhumanista-bc796": {
+      "hosting": {
+        "curriculum": [
+          "clubhumanista-bc796"
+        ]
+      }
+    }
   }
 }
