@@ -11,7 +11,7 @@ SwiperCore.use([Navigation]);
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss', '../../../../node_modules/swiper/swiper.scss','../../../../node_modules/swiper/modules/navigation/navigation.scss'],
+  styleUrls: ['./carousel.component.scss', '../../../../node_modules/swiper/swiper.min.css','../../../../node_modules/swiper/modules/navigation/navigation.min.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class CarouselComponent implements OnInit {
